@@ -1,0 +1,48 @@
+<div class="container pt-5">
+<div class="row">
+  <div class="col-6"><h1>Journal Section</h1></div>
+</div>
+
+
+<table class="table table-info table-striped table-hover text-center">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Format</th>
+      <th scope="col">Classification</th>
+      <th scope="col">Barcode</th>
+      <th scope="col">Date Published</th>
+      <th scope="col">Acquisition Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each data}}
+    <tr>
+      <th scope="row">{{this.bookId}}</th>
+      <td>{{this.isbn}}</td>
+      <td>{{this.title}}</td>
+      <td>{{this.main_author}}</td>
+      <td>{{this.subject}}</td>
+      <td>{{this.format}}</td>
+      <td>{{this.collectionCode}} {{this.subjectLoc}} {{authorCutter}} {{pubYear}}</td>
+      <td>{{this.barcode}}</td> 
+      <td>{{this.publicationDate}}</td> 
+      <td>{{this.acquisitionDate}}</td>
+      <td>
+        <a href="/editbook/{{this.bookId}}" type="button" class="btn btn-primary btn-small"><i class="bi bi-pencil"></i>Edit</a>
+        <a href="/{{this.bookId}}" type="button" class="btn btn-danger btn-small"><i class="bi bi-trash"></i>Archive</a>
+      </td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+</div>
+
+

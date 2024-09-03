@@ -1,0 +1,96 @@
+<style>
+    button{
+        width: 30%;
+        place-self: center;
+    }
+</style>
+
+
+<div class="container pt-5">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Renting List</li>
+  </ol>
+</nav>
+
+<form class="row g-3 needs-validation" method="POST" action="/addrent">
+    <div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="barcodeInput" value="{{this.barcode}}" placeholder="Barcode" name="barcode" required>
+        <label for="barcodeInput">Barcode</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="usernameInput" value="{{this.username}}" placeholder="Username" name="username" required>
+        <label for="contactInput">Username</label>
+    </div>
+    </div>
+<div class="col-6">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="borrowDateInput" placeholder="Borrow Date" name="borrow_date" readonly>
+            <label for="borrowDateInput">Borrow Date</label>
+        </div>
+    </div>
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="returnDateInput" placeholder="Return Date" name="return_date" readonly>
+        <label for="returnDateInput">Return Date</label>
+    </div>
+</div>
+
+<div class="col-12 d-grid">
+    <button class="btn btn-primary" type="submit">Confirm</button>
+</div>
+</form>
+</div>  
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Helper function to format date as MM/DD/YYYY
+    function formatDateToMMDDYYYY(date) {
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${month}/${day}/${year}`;
+    }
+
+    // Set the current date for the borrow_date input field
+    const currentDate = new Date();
+    const borrowDateInput = document.getElementById('borrowDateInput');
+    const returnDateInput = document.getElementById('returnDateInput');
+    
+    borrowDateInput.value = formatDateToMMDDYYYY(currentDate);
+
+    // Calculate the return date, 3 days ahead
+    const returnDate = new Date();
+    returnDate.setDate(returnDate.getDate() + 3);
+
+    // Set the return date input field
+    returnDateInput.value = formatDateToMMDDYYYY(returnDate);
+});
+
+
+  {{#if alert}}
+    Toastify({
+        text: "{{alert}} {{#if isAlertSuccess}}✅{{else}}❌{{/if}}",
+        duration: 5000,
+        gravity: "top",
+        position: 'center',
+        backgroundColor: "{{#if isAlertSuccess}}linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61)){{else}}linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113)){{/if}}, rgba(0, 0, 0, 0.7)",
+        className: "custom-toast",
+        style: {
+            fontSize: "30px",
+            padding: "15px",
+            fontFamily: "Arial, sans-serif",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            color: "#fff",
+            fontWeight: "bold",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+        }
+    }).showToast();
+{{/if}}
+</script>

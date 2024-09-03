@@ -1,0 +1,41 @@
+<style>
+    body {
+            background-color: #f5f5f5;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+    button{
+        width: 35%;
+        margin: 0 auto;
+    }
+</style>
+
+
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="barcodeInput" value="{{this.barcode}}" placeholder="Barcode" name="barcode" required>
+        <label for="barcodeInput">Barcode</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="usernameInput" value="{{this.username}}" placeholder="Username" name="username" required>
+        <label for="contactInput">Username</label>
+    </div>
+    </div>
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="date" class="form-control" id="borrowDateInput" value="{{this.borrow_date}}" placeholder="Borrow Date" name="borrow_date" required>
+        <label for="borrowDateInput">Borrow Date</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="date" class="form-control" id="returnDateInput" value="{{this.return_date}}" placeholder="Return Date" name="return_date" required>
+        <label for="returnDateInput">Return Date</label>
+    </div>
+</div>
+
+<div class="col-12 d-grid">
+    <button class="btn btn-primary" type="submit">Confirm</button>
+</div>

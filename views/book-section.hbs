@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Section</title>
+</head>
+
+<body>
+
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-6">
+                <h1>Book Section</h1>
+            </div>
+            <div class="container-sm pt-3 mx-auto" style="max-width: 600px;">
+                <h3>Search books</h3>
+                <form class="d-flex pb-3" method="post" action="/">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-primary me-2" type="submit" name="action" value="search">Search</button>
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" class="form-control me-2" name="startDate">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" class="form-control me-2" name="endDate">
+                    <button class="btn btn-outline-primary" type="submit" name="action" value="sort">Sort</button>
+                </form>
+            </div>
+            <table class="table table-info table-striped table-hover text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Authors</th>
+                        <th scope="col">Section</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Date Published</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                    <tr>
+                        <td>{{this.isbn}}</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.authors}}</td>
+                        <td>{{this.section}}</td>
+                        <td>{{this.genre}}</td>
+                        <td>{{this.publicationDate}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

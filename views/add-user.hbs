@@ -1,0 +1,37 @@
+<div class="container pt-5">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">New User</li>
+  </ol>
+</nav>
+
+
+<form class="row g-3 needs-validation" method="POST" action="/adduser">
+    {{> user-form}}
+</form>
+</div>
+
+<script>
+{{#if alert}}
+    Toastify({
+        text: "{{alert}} {{#if isAlertSuccess}}✅{{else}}❌{{/if}}",
+        duration: 5000,
+        gravity: "top",
+        position: 'center',
+        backgroundColor: "{{#if isAlertSuccess}}linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61)){{else}}linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113)){{/if}}, rgba(0, 0, 0, 0.7)",
+        className: "custom-toast",
+        style: {
+            fontSize: "30px",
+            padding: "15px",
+            fontFamily: "Arial, sans-serif",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            color: "#fff",
+            fontWeight: "bold",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+        }
+    }).showToast();
+{{/if}}
+</script>

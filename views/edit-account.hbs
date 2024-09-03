@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <title>Edit Account</title>
+</head>
+
+<style>
+
+body{
+    background-color: #f5f5f5;
+}
+
+    button{
+        width: 35%;
+    }
+</style>
+<body>
+    <div class="container pt-3" id="body-container">
+        <div class="containers mt-5">
+            <div id="login-title">
+                <h2 class="text-center mb-4">Edit Account</h2>
+                {{#each userData}}
+                <form class="row g-3 needs-validation" id="login-form" method="POST" action="/updateaccount">
+
+                <div class="col-md-6">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" value="{{this.username}}" name="username" required>
+                        <div class="invalid-feedback">
+                            Please enter a username.
+                        </div>
+                    </div>
+
+                <div class="col-md-6">
+                        <label for="current_password" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password" required>
+                        <div class="invalid-feedback">
+                            Please enter your current password.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="new_password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" value="{{this.first_name}}" name="first_name" required>
+                        <div class="invalid-feedback">
+                            Please enter your first name.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" value="{{this.last_name}}" name="last_name" required>
+                        <div class="invalid-feedback">
+                            Please enter your last name.
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="contact" value="{{this.contact}}" name="contact" required>
+                        <div class="invalid-feedback">
+                            Please enter your contact information.
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    <div class="col-12 mt-3 text-center">
+                        <button type="submit" class="btn btn-success" id="btn-login">Confirm</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+<script>
+    {{#if alert}}
+    Toastify({
+        text: "{{alert}} {{#if isAlertSuccess}}✅{{else}}❌{{/if}}",
+        duration: 5000,
+        gravity: "top",
+        position: 'center',
+        backgroundColor: "{{#if isAlertSuccess}}linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61)){{else}}linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113)){{/if}}, rgba(0, 0, 0, 0.7)",
+        className: "custom-toast",
+        style: {
+            fontSize: "30px",
+            padding: "15px",
+            fontFamily: "Arial, sans-serif",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            color: "#fff",
+            fontWeight: "bold",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+        }
+    }).showToast();
+{{/if}}
+</script>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory</title>
+
+    <style>
+        body {
+            font-size: 90%;
+        }
+
+        select {
+            margin: 0.4rem 0;
+        }
+
+        #searchInput {
+            width: min(400px);
+        }
+
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+
+        a:hover {
+            color: white;
+        }
+         .total-info-container {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px;
+        background-color: #f0f0f0; /* Optional: Add a background color for better visibility */
+    }
+
+    .total-info-container p {
+        margin-right: 20px; /* Adjust the margin as needed to separate the paragraphs */
+    }
+
+        #refresh {
+            margin-bottom: .5rem;
+        }
+
+        p {
+            font-weight: bold;
+        }
+
+        @media print {
+        body {
+            font-size: 80%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div style="text-align: right; margin-right: 20px; padding-top:20px;">
+        <button type="button" class="btn btn-primary" onclick="printTable()">Print</button>
+    </div>
+
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-6">
+                <h1>Book Inventory</h1>
+            </div>
+            <div class="container-sm pt-3">
+                <div class="container">
+                    <div class="mb-3">
+        <label for="searchInput" class="form-label">Quick Search:</label>
+        <input type="text" class="form-control" id="searchInput" placeholder="Type to search">
+    </div>
+                </div>
+
+                <div class="container">
+                    <h3 class="mt-3">Filter books</h3>
+                    <form class="pb-3 row g-2" method="post" action="/filter">
+                        <div class="col-md-2">
+                            <select class="form-select" name="section">
+                                <option value="" selected>Section</option>
+                                {{#each sections}}
+                                <option value="{{this.section}}">{{this.section}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-select" name="subject">
+                                <option value="" selected>Subject</option>
+                                {{#each subjects}}
+                                <option value="{{this.subject}}">{{this.subject}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-select" name="publisher">
+                                <option value="" selected>Publisher</option>
+                                {{#each publishers}}
+                                <option value="{{this.publisher}}">{{this.publisher}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+    <select class="form-select" name="subjectLoc">
+        <option value="" selected>Subject Location</option>
+        {{#each subjectLocs}}
+            <option value="{{this.subjectLoc}}">{{this.subjectLoc}}</option>
+        {{/each}}
+    </select>
+</div>
+
+                        <div class="col-md-2">
+                            
+                            <select class="form-select" name="publicationYear" id="publicationYear">
+                                <option value="" selected>Publication Year</option>
+                                {{#each publicationYears}}
+                                <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            
+                            <select class="form-select" name="acquisitionYear" id="acquisitionYear">
+                                <option value="" selected>Acquisition Year</option>
+                                {{#each acquisitionYears}}
+                                <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-select" name="format">
+                                <option value="" selected>Format</option>
+                                {{#each formats}}
+                                <option value="{{this.format}}">{{this.format}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-select" name="acquisitionSource">
+                                <option value="" selected>Source</option>
+                                {{#each acquisitionSources}}
+                                <option value="{{this.acquisitionSource}}">{{this.acquisitionSource}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-select" name="status">
+                                <option value="" selected>Status</option>
+                                {{#each statuses}}
+                                <option value="{{this.status}}">{{this.status}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button class="btn btn-outline-primary" type="submit" name="submit">Apply Filters</button>
+                        </div>
+                    </form>
+
+             
+            <button class="btn btn-outline-primary" type="button" id="refresh"><a href="/book-inventory">Refresh</a></button>
+            <div class="total-info-container">
+    <p>Total Title: {{this.totalCount}}</p>
+    <p>Total Copies: {{this.totalCopies}}</p>
+</div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-info table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th scope="col">ISBN</th>
+                <th scope="col">Title</th>
+                <th scope="col">Main Author</th>
+                <th scope="col">Section</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Catalog</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Date Published</th>
+                <th scope="col">Date Acquired</th>
+                <th scope="col">Format</th>
+                <th scope="col">Copies</th>
+                <th scope="col">Source</th>
+                <th scope="col">Barcode</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.isbn}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.main_author}}</td>
+                <td>{{this.section}}</td>
+                <td>{{this.subject}}</td>
+                <td>{{this.collectionCode}} {{this.subjectLoc}} {{authorCutter}} {{pubYear}}</td>
+                <td>{{this.publisher}}</td>
+                <td>{{this.publicationDate}}</td>
+                <td>{{this.acquisitionDate}}</td>
+                <td>{{this.format}}</td>
+                <td>{{this.copies}}</td>
+                <td>{{this.acquisitionSource}}</td>
+                <td>{{this.barcode}}</td>
+                <td>{{this.status}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</body>
+
+
+<script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+        let searchText = this.value.toLowerCase();
+        let rows = document.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            let textContent = row.textContent.toLowerCase();
+            row.style.display = textContent.includes(searchText) ? '' : 'none';
+        });
+    });
+
+   function printTable() {
+    // Hide non-essential elements
+    document.querySelector('.container-sm').style.display = 'none';
+    document.querySelector('.sidebar').style.display = 'none'; // Add this line to hide the sidebar
+
+    window.print();
+
+    // Show the hidden elements after printing
+    document.querySelector('.container-sm').style.display = 'block';
+    document.querySelector('.sidebar').style.display = 'block'; // Add this line to show the sidebar
+}
+</script>
+</html>

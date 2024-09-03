@@ -1,0 +1,183 @@
+<style>
+
+  body {
+            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+        }
+        select {
+            margin: 0.4rem 0;
+        }
+
+        #searchInput {
+            width: min(400px);
+        }
+
+        a{
+            text-decoration: none;
+            color: blue;
+        }
+        
+        a:hover{
+            color:white;
+        }
+
+        #refresh{
+            margin-bottom: .5rem;
+        }
+    </style>
+
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-6">
+      <h1>Book List</h1>
+    </div>
+  </div>
+
+  <div class="container-sm pt-3">
+    <div class="container">
+      <div class="mb-3">
+        <label for="searchInput" class="form-label">Quick Search:</label>
+        <input type="text" class="form-control" id="searchInput" placeholder="Type to search">
+      </div>
+    </div>
+
+    <div class="container">
+      <h3 class="mt-3">Filter books</h3>
+      <form class="pb-3 row g-2" method="post" action="/userfilter">
+        <div class="col-md-2">
+          <select class="form-select" name="section">
+            <option value="" selected>Section</option>
+            {{#each sections}}
+            <option value="{{this.section}}">{{this.section}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <select class="form-select" name="subject">
+            <option value="" selected>Subject</option>
+            {{#each subjects}}
+            <option value="{{this.subject}}">{{this.subject}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+
+        <div class="col-md-2">
+          <select class="form-select" name="publicationYear" id="publicationYear">
+            <option value="" selected>Publication Year</option>
+            {{#each publicationYears}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <button class="btn btn-outline-primary" type="submit" name="submit">Apply Filters</button>
+        </div>
+      </form>
+      <div class="col-md-2">
+        <button class="btn btn-outline-primary" type="button" id="refresh"><a
+            href="/viewuserbook">Refresh</a></button>
+      </div>
+
+      <table class="table table-info table-striped table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col">Barcode</th>
+            <th scope="col">Title</th>
+            <th scope="col">Main Author</th>
+            <th scope="col">Section</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Classification</th>
+            <th scope="col">Date Published</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {{#each data}}
+          <tr>
+            <td>{{this.barcode}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.main_author}}</td>
+            <td>{{this.section}}</td>
+            <td>{{this.subject}}</td>
+            <td>{{this.collectionCode}} {{this.subjectLoc}} {{authorCutter}} {{pubYear}}</td>
+            <td>{{this.publicationDate}}</td>
+            <td>
+              <a href="#" class="btn btn-primary btn-small borrow-button" data-bs-toggle="modal"
+                data-bs-target="#confirmationModal" onclick="setAction('/borrow/{{this.bookId}}')">
+                <i class="bi bi-cursor-fill"></i> Borrow
+              </a>
+            </td>
+          </tr>
+          {{/each}}
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to borrow the book?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="confirmButton" data-bs-dismiss="modal">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      {{#if alert}}
+    Toastify({
+        text: "{{alert}} {{#if isAlertSuccess}}✅{{else}}❌{{/if}}",
+        duration: 5000,
+        gravity: "top",
+        position: 'center',
+        backgroundColor: "{{#if isAlertSuccess}}linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61)){{else}}linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113)){{/if}}, rgba(0, 0, 0, 0.7)",
+        className: "custom-toast",
+        style: {
+            fontSize: "30px",
+            padding: "15px",
+            fontFamily: "Arial, sans-serif",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            color: "#fff",
+            fontWeight: "bold",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+        }
+    }).showToast();
+{{/if}}
+
+          let actionUrl = '';
+
+          function setAction(url) {
+            actionUrl = url;
+          }
+
+          document.querySelector('#confirmButton').addEventListener('click', function () {
+            if (actionUrl !== '') {
+              window.location.href = actionUrl;
+            }
+          });
+
+          document.getElementById('searchInput').addEventListener('input', function () {
+        let searchText = this.value.toLowerCase();
+        let rows = document.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            let textContent = row.textContent.toLowerCase();
+            row.style.display = textContent.includes(searchText) ? '' : 'none';
+        });
+    });
+    </script>

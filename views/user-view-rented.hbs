@@ -1,0 +1,93 @@
+<div class="container pt-5">
+<div class="row">
+  <div class="col-6"><h1>Rent List</h1></div>
+</div>
+
+<table class="table table-info table-striped table-hover text-center table-bordered border-info">
+  <thead>
+    <tr>
+      <th scope="col">ISBN</th>
+      <th scope="col">Borrowed Book</th>
+      <th scope="col">Username</th>
+      <th scope="col">Borrow Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Action</th>
+    </tr>
+</thead>
+  <tbody>
+
+    {{#each data}}
+    <tr>
+      <td>{{this.isbn}}</td>
+      <td>{{this.title}}</td>
+      <td>{{this.username}}</td>
+      <td>{{formatDate this.borrow_date}}</td>
+      <td>{{formatDate this.return_date}}</td>
+      <td>
+        {{!-- <a href="#" class="btn btn-success btn-small return-button" data-bs-toggle="modal" data-bs-target="#confirmationModal" onclick="setAction('/return/{{this.borrowId}}')">
+  <i class="bi bi-check2-circle"></i> Return
+</a> --}}
+        <a href="#" class="btn btn-success btn-small return-button" data-bs-toggle="modal" data-bs-target="#confirmationModal" onclick="setAction('/renew/{{this.borrowId}}')">
+  <i class="bi bi-check2-circle"></i> Renew
+</a>
+      </td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+</div>
+
+<div class="modal" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to renew this book?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" id="confirmButton" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  {{#if alert}}
+    Toastify({
+        text: "{{alert}} {{#if isAlertSuccess}}✅{{else}}❌{{/if}}",
+        duration: 5000,
+        gravity: "top",
+        position: 'center',
+        backgroundColor: "{{#if isAlertSuccess}}linear-gradient(to right, rgb(0, 176, 155), rgb(150, 201, 61)){{else}}linear-gradient(to right, rgb(255, 95, 109), rgb(255, 195, 113)){{/if}}, rgba(0, 0, 0, 0.7)",
+        className: "custom-toast",
+        style: {
+            fontSize: "30px",
+            padding: "15px",
+            fontFamily: "Arial, sans-serif",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            color: "#fff",
+            fontWeight: "bold",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+        }
+    }).showToast();
+{{/if}}
+
+      let actionUrl = '';
+
+  function setAction(url) {
+    actionUrl = url;
+  }
+
+  document.querySelector('#confirmButton').addEventListener('click', function () {
+    if (actionUrl !== '') {
+      window.location.href = actionUrl;
+    }
+  });
+</script>

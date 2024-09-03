@@ -1,0 +1,37 @@
+  <style>
+    .log-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .log-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .log-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .log-item:hover {
+      background-color: #f9f9f9;
+    }
+  </style>
+
+
+<h1 class="pt-2">System Logs</h1>
+
+<div class="log-container">
+  <ul class="log-list">
+    {{#each logs}}
+      <li class="log-item">{{log_message}}</li>
+    {{/each}}
+  </ul>
+</div>

@@ -1,0 +1,79 @@
+CREATE TABLE userlogin (
+    userloginid INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role VARCHAR(30) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,    
+    last_name VARCHAR(100) NOT NULL,    
+    status VARCHAR(30) DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE books (
+    bookId INT PRIMARY KEY AUTO_INCREMENT,
+    isbn VARCHAR(255),
+    title VARCHAR(255),
+    subtitle VARCHAR(255),
+    edition VARCHAR(255),
+    seriesTitle VARCHAR(255),
+    genre VARCHAR(255),
+    subject VARCHAR(255),
+    callNumber VARCHAR(255),
+    section VARCHAR(255),
+    collectionCode VARCHAR(255),
+    authorCutter VARCHAR(255),
+    pubYear INT,
+    main_author VARCHAR(255),
+    secondary_authors TEXT,
+    responsibility VARCHAR(255),
+    publisher VARCHAR(255),
+    publicationPlace VARCHAR(255),
+    publicationDate VARCHAR(255),
+    pages VARCHAR(255),
+    notes VARCHAR(255),
+    summary VARCHAR(255),
+    copies INT,
+    format VARCHAR(255),
+    acquisitionDate VARCHAR(255),
+    acquisitionSource VARCHAR(255),
+    barcode VARCHAR(255),
+    status VARCHAR(30) DEFAULT 'active',
+    userloginId INT,
+    FOREIGN KEY (userloginId) REFERENCES userlogin(userloginId),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+
+CREATE TABLE rent (
+    borrowId INT PRIMARY KEY AUTO_INCREMENT,
+    borrow_date DATE,
+    return_date DATE,
+    status VARCHAR(20) DEFAULT 'active',
+    userId INT,
+    bookId INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(userId),
+    FOREIGN KEY (bookId) REFERENCES books(bookId)
+);
+
+
+CREATE TABLE returntable (
+    returnId INT PRIMARY KEY AUTO_INCREMENT,
+    actual_return_date DATE,
+    status VARCHAR(20),
+    userId INT,
+    bookId INT,
+    borrowId INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(userId),
+    FOREIGN KEY (bookId) REFERENCES books(bookId),
+    FOREIGN KEY (borrowId) REFERENCES rent(borrowId)
+);

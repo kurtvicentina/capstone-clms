@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+
+    <style>
+        .report-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        h1,
+        h5 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .rep {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: right; margin-right: 20px; padding-top:20px;">
+        <button type="button" class="btn btn-primary" onclick="printPage()">Print</button>
+    </div>
+
+    <h1>Book Reports</h1>
+
+    <h5>Borrowed books count:</h5>
+    <ul>
+        <li id="borrowedBooksCount">{{ reportType }}: {{ borrowedBooksCount }}</li>
+    </ul>
+
+    <h5>Returned books count:</h5>
+    <ul>
+        <li id="returnedBooksCount">{{ reportType }}: {{ returnedBooksCount }}</li>
+    </ul>
+
+<h5>Added books count:</h5>
+<ul>
+    <li id="addedBooksCount">{{ reportType }}: {{ addedBooksCount }}</li>
+</ul>
+
+
+<h5>Archived books count:</h5>
+<ul>
+    <li id="archivedBooksCount">{{ reportType }}: {{ archivedBooksCount }}</li>
+</ul>
+
+<h5>Destroyed books count:</h5>
+<ul>
+    <li id="destroyedBooksCount">{{ reportType }}: {{ destroyedBooksCount }}</li>
+</ul>
+
+    <br>
+    <hr>
+    <h1>User Reports</h1>
+
+<h5>User registration count:</h5>
+<ul>
+    <li id="userRegistrationCount">{{ reportType }}: {{ userRegistrationCount }}</li>
+</ul>
+
+<h5>User login count:</h5>
+<ul>
+    <li id="userLoginCount">{{ reportType }}: {{ userLoginCount }}</li>
+</ul>
+
+    <form method="post" action="/reports" id="generateReportForm">
+        <input type="hidden" name="reportType" value="">
+        <button type="submit" class="rep" onclick="generateReport('Daily')">Generate Daily Report</button>
+        <button type="submit" class="rep" onclick="generateReport('Weekly')">Generate Weekly Report</button>
+        <button type="submit" class="rep" onclick="generateReport('Monthly')">Generate Monthly Report</button>
+        <button type="submit" class="rep" onclick="generateReport('Yearly')">Generate Yearly Report</button>
+    </form>
+
+    <hr>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        function generateReport(reportType) {
+            $('#generateReportForm').find('input[name="reportType"]').val(reportType);
+
+            // Update the headers based on the selected report type
+            updateHeaders(reportType);
+
+            $('#generateReportForm').submit();
+        }
+
+        // Helper function to update headers based on the selected report type
+        function updateHeaders(reportType) {
+            // Update book-related headers
+            $('#borrowedBooksCount').text(`${capitalizeFirstLetter(reportType)}: {{ borrowedBooksCount }}`);
+            $('#returnedBooksCount').text(`${capitalizeFirstLetter(reportType)}: {{ returnedBooksCount }}`);
+            $('#addedBooksCount').text(`${capitalizeFirstLetter(reportType)}: {{ addedBooksCount }}`);
+            $('#archivedBooksCount').text(`${capitalizeFirstLetter(reportType)}: {{ archivedBooksCount }}`);
+            $('#destroyedBooksCount').text(`${capitalizeFirstLetter(reportType)}: {{ destroyedBooksCount }}`);
+
+            // Update user-related headers
+            $('#userRegistrationCount').text(`${capitalizeFirstLetter(reportType)}: {{ userRegistrationCount }}`);
+            $('#userLoginCount').text(`${capitalizeFirstLetter(reportType)}: {{ userLoginCount }}`);
+            $('#userBorrowCount').text(`${capitalizeFirstLetter(reportType)}: {{ userBorrowCount }}`);
+            $('#userReturnCount').text(`${capitalizeFirstLetter(reportType)}: {{ userReturnCount }}`);
+        }
+
+        // Helper function to capitalize the first letter
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function printPage() {
+            window.print();
+        }
+    </script>
+
+</body>
+
+</html>

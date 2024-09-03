@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <style>
+        form label{
+            font-weight: 500;
+        }
+
+        form h1{
+            font-style: italic;
+            padding-bottom: 10px;
+        }
+
+        form select option{
+            font-weight: 500;
+        }
+    </style>
+
+    <div class="container">
+    <form>
+        <h1>Title</h1>
+        {{#each data}}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="isbn" value="{{this.isbn}}" placeholder="ISBN" name="isbn" maxlength="13" disabled>
+                    <label for="isbn">ISBN</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="title" value="{{this.title}}" placeholder="Title" name="title" disabled>
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="subtitle" value="{{this.subtitle}}" placeholder="Subtitle" name="subtitle" disabled>
+                    <label for="subtitle">Subtitle</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="edition" value="{{this.edition}}" placeholder="Edition" name="edition" disabled>
+                    <label for="edition">Edition</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="seriesTitle" value="{{this.seriesTitle}}" placeholder="Series Title" name="seriesTitle" disabled>
+                    <label for="seriesTitle">Series Title</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="genre" value="{{this.genre}}" placeholder="Genre" name="genre" disabled>
+                    <label for="genre">Genre</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="subject" value="{{this.subject}}" placeholder="Subject" name="subject" disabled>
+                    <label for="subject">Subject</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label for="section">Section</label>
+                    <select class="form-control" id="section" name="section" disabled>
+                        <option value="Circulation">Circulation</option>
+                        <option value="Filipiniana">Filipiniana</option>
+                        <option value="Reserve">Fiction</option>
+                        <option value="Reference">Reference</option>
+                        <option value="Periodical">DVD</option>
+                        <option value="Archive">CD</option>
+                        <option value="Internet">Journal</option>
+                        <option value="E-Library">Magazine</option>
+                        <option value="Special">Newspaper</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <h1>Call Number</h1>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label for="collectionCode">Section Locator</label>
+                    <select class="form-control" id="collectionCode" name="collectionCode" value="{{this.collectionCode}}" disabled>
+                        <option value="CIR">CIR</option>
+                        <option value="FIL">FIL</option>
+                        <option value="FIC">FIC</option>
+                        <option value="REF">REF</option>                   
+                        <option value="REF">DVD</option>                   
+                        <option value="REF">CD</option>                   
+                        <option value="REF">JRN</option>                   
+                        <option value="REF">MZN</option>                   
+                        <option value="REF">NWS</option>                   
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-group">
+                    <label for="subjectLocator">Classification</label>
+                    <select class="form-control" name="subjectLoc" id="subjectLocator" value= {{this.subjectLoc}} disabled>
+                        <optgroup label="GENERAL WORKS">
+                        <option value="AE">AE  -  Encyclopedias</option>
+                        <option value="AG">AG  -  Dictionaries</option>
+                        </optgroup>
+                        <optgroup label="PHILOSOPHY.PSYCHOLOGY.RELIGION">
+                        <option value="B">B  -  Philosophy</option>
+                        <option value="BF">BF  -  Psychology</option>
+                        <option value="BL-BX">BL-BX  -  Religion</option>
+                        </optgroup>
+                        <optgroup label="AUXILIARY SCIENCES OF HISTORY">
+                        <option value="CB">CB  -  History of Civilization</option>
+                        <option value="CT">CT  -  Biography</option>
+                        </optgroup>
+                        <optgroup label="HISTORY">
+                        <option value="DA-DR">DA-DR  -  Europe</option>
+                        <option value="DS">DS  -  Asia</option>
+                        <option value="DT">DT  -  Africa</option>
+                        <option value="DU">DU  -  Oceania. Australia. New Zealand</option>
+                        </optgroup>
+                        <optgroup label="GEOGRAPHY.ANTHROPOLOGY.RECREATION">
+                        <option value="G">G  -  Geography. Atlases. Maps</option>
+                        <option value="GB">GB  -  Physical Geography</option>
+                        <option value="GC">GC  -  Oceanography</option>
+                        <option value="GF">GF  -  Human Ecology</option>
+                        <option value="GN">GN  -  Anthropology</option>
+                        </optgroup>
+                        <optgroup label="SOCIAL SCIENCES">
+                        <option value="HA">HA  -  Statistics</option>
+                        <option value="HB">HB  -  Economics</option>
+                        <option value="HC-HD">HC-HD  -  Economic History and Conditions</option>
+                        <option value="HE">HE  -  Transportation and Communications</option>
+                        <option value="HF">HF  -  Commerce</option>
+                        <option value="HG">HG  -  Finance</option>
+                        <option value="HJ">HJ  -  Public Finance</option>
+                        <option value="HM">HM  -  Sociology</option>
+                        <option value="HN">HN  -  Social History</option>
+                        <option value="HQ">HQ  -  Family. Marriage. Women</option>
+                        <option value="HT">HT  -  Social classes. Race relations</option>
+                        <option value="HX">HX  -  Socialism. Communism</option>
+                        </optgroup>
+                        <optgroup label="POLITCAL SCIENCE">
+                        <option value="JF-JQ">JF-JQ  -  Constitutional History and Administration</option>
+                        <option value="JX">JX  -  International Law. International Relations</option>
+                        </optgroup>
+                        <optgroup label="LAW">
+                        <option value="K">K  -  Law</option>
+                        </optgroup>
+                        <optgroup label="EDUCATION">
+                        <option value="L">L  -  Education</option>
+                        </optgroup>
+                        <optgroup label="MUSIC">
+                        <option value="M">M  -  Music</option>
+                        </optgroup>
+                        <optgroup label="FINE ARTS">
+                        <option value="N">N  -  Fine Arts</option>
+                        </optgroup>
+                        <optgroup label="LANGUAGE AND LITERATURE">
+                        <option value="P">P  -  Language and Literature</option>
+                        </optgroup>
+                        <optgroup label="SCIENCE">
+                        <option value="QA">QA  -  Mathematics</option>
+                        <option value="QE">QE  -  Geology</option>
+                        <option value="QH">QH  -  Natural History. Biology</option>
+                        </optgroup>
+                        <optgroup label="MEDICINE">
+                        <option value="R">R  -  Medicine</option>
+                        </optgroup>
+                        <optgroup label="AGRICULTURE">
+                        <option value="SB">SB  -  Plant Culture</option>
+                        <option value="SD">SD  -  Forestry</option>
+                        <option value="SF">SF  -  Animal Culture</option>
+                        <option value="SH">SH  -  Aquaculture. Fisheries</option>
+                        </optgroup>
+                        <optgroup label="TECHNOLOGY">
+                        <option value="TA">TA  -  Engineering - General and Civil</option>
+                        <option value="TC">TC  -  Hydraulic Engineering</option>
+                        <option value="TD">TD  -  Environmental Technology. Sanitaray Engineering</option>
+                        <option value="TE">TE  -  Highway Engineering</option>
+                        <option value="TF">TF  -  Railroad Engineering</option>
+                        <option value="TG">TG  -  Bridge Construction</option>
+                        <option value="TH">TH  -  Building Construction</option>
+                        <option value="TJ">TJ  -  Mechanical Engineering</option>
+                        <option value="TK">TK  -  Electrical Engineering</option>
+                        <option value="TN">TN  -  Mining Engineering, Metallurgy</option>
+                        </optgroup>
+                        <optgroup label="MILITARY SCIENCE">
+                        <option value="U">U  -  Military Science</option>
+                        </optgroup>
+                        <optgroup label="NAVAL SCIENCE">
+                        <option value="V">V  -  Naval Science</option>
+                        </optgroup>
+                        <optgroup label="BIBLIOGRAPHY: LIBRARY SCIENCE">
+                        <option value="Z">Z  -  Bibliography: Library Science</option>
+                        </optgroup>
+                    </select>
+                    <div class="form-floating">
+                    <input type="text" class="form-control" id="callNumber" value="{{this.callNumber}}" placeholder="Classification" name="callNumber" disabled>
+                    <label for="callNumber">Subclass</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="authorCutter" value="{{this.authorCutter}}" placeholder="Author Cutter" name="authorCutter" disabled>
+                    <label for="authorCutter">Author's Cutter</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="pubYear" value="{{this.pubYear}}" placeholder="Publication Year" name="pubYear" disabled>
+                    <label for="pubYear">Publication Year</label>
+                </div>
+            </div>
+        </div>
+
+        <h1>Author</h1>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="main_author" value="{{this.main_author}}" placeholder="Main Author" name="main_author" disabled>
+            <label for="main_author">Main Author</label>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+    <div id="secondaryAuthorsContainer">
+        <!-- Display existing secondary authors -->
+        {{#each this.secondary_authors}}
+        <div class="form-floating">
+            <input type="text" class="form-control" value="{{this}}" placeholder="Secondary Author" name="sec_author[{{@index}}]" disabled>
+            <label for="sec_author">Secondary Author</label>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="responsibility" value="{{this.responsibility}}" placeholder="Responsibility" name="responsibility" disabled>
+            <label for="responsibility">Statement of Responsibility</label>
+        </div>
+    </div>
+</div>
+
+        <h1>Publication</h1>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="publisher" value="{{this.publisher}}" placeholder="Publisher" name="publisher" disabled>
+                    <label for="publisher">Publisher</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="publicationPlace" value="{{this.publicationPlace}}" placeholder="Place of Publication" name="publicationPlace" disabled>
+                    <label for="publicationPlace">Place of Publication</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="publicationDate" value="{{this.publicationDate}}" placeholder="Publication Date" name="publicationDate" disabled> 
+                    <label for="publicationDate">Publication Date</label>
+                </div>
+            </div>
+        </div>
+
+        <h1>Physical Description</h1>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="pages" value="{{this.pages}}" placeholder="Pages" name="pages" disabled>
+                    <label for="pages">Pages</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="notes" value="{{this.notes}}" placeholder="Notes" name="notes" disabled>
+                    <label for="notes">Notes</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="summary" value="{{this.summary}}" placeholder="Summary" name="summary" disabled>
+                    <label for="summary">Summary</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="copies" value="{{this.copies}}" placeholder="Copies" name="copies" disabled>
+                    <label for="copies">Copies</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="format" value="{{this.format}}" placeholder="Format" name="format" disabled>
+                    <label for="format">Format</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="acquisitionDate" value="{{this.acquisitionDate}}" placeholder="Acquisition Date" name="acquisitionDate" disabled>
+                    <label for="acquisitionDate">Acquisition Date</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="acquisitionSource" value="{{this.acquisitionSource}}" placeholder="Acquisition Source" name="acquisitionSource" disabled>
+                    <label for="acquisitionSource">Acquisition Source</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="barcode" value="{{this.barcode}}" placeholder="Barcode" name="barcode" disabled>
+                    <label for="barcode">Barcode</label>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+    </form>
+</div>
+
+</body>
+</html>
+
+<script>
+    function addSecondaryAuthor() {
+    const container = document.getElementById('secondaryAuthorsContainer');
+    const input = document.createElement('div');
+    input.className = 'form-floating';
+    input.innerHTML = `
+        <input type="text" class="form-control sec_author" placeholder="Secondary Author" name="sec_author[]">
+        <label for="sec_author">Secondary Author</label>
+    `;
+    container.appendChild(input);
+}
+
+</script>

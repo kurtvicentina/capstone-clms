@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Status</title>
+</head>
+
+<body>
+  <h1 class="pt-5">Inventory Status</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4 pt-5">
+    <div class="col">
+      <a href="#" class="text-decoration-none font-color-none text-reset">
+        <div class="card h-100 border-primary mb-3 text-white" style="background-color: #7CB9E8; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+          <div class="card-body">
+            <h5 class="card-title" style="color:black"><strong>Total Books</strong></h5>
+            <hr>
+            <div class="col-6 d-flex justify-content-between">
+              <i class="bi bi-journal-plus" style="font-size: 3rem; color:black"></i>
+              <span class="text-center pl-2" style="font-size: 2rem; color:black">{{totalBooks}}</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a href="#" class="text-decoration-none font-color-none text-reset">
+        <div class="card h-100 border-black mb-3" style="background-color: #72A0C1; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+          <div class="card-body">
+            <h5 class="card-title" style="color:black;"><strong>Currently Rented Copies</strong></h5>
+            <hr>
+            <div class="col-6 d-flex justify-content-between">
+              <i class="bi bi-upc-scan" style="font-size: 3rem; color: black;"></i>
+              <span class="text-center pl-2" style="font-size: 2rem; color: black;">{{totalRentedBooks}}</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col"> <a href="#" class="text-decoration-none font-color-none text-reset">
+        <div class="card h-100 border-primary mb-3 text-white" style="background-color: #0039a6; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Available for borrow</strong></h5>
+            <hr>
+            <div class="col-6 d-flex justify-content-between"> <i class="bi bi-send-check-fill"
+                style="font-size: 3rem; color:;"></i> <span class="text-center pl-2"
+                style="font-size: 2rem; color:;">{{availableBooksToBorrow}}</span> </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col"> <a href="#" class="text-decoration-none font-color-none text-reset">
+        <div class="card h-100 border-black mb-3" style="background-color: #0076CE; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;" >
+          <div class="card-body">
+            <h5 class="card-title" style="color: white"><strong>Total Users</strong></h5>
+            <hr>
+            <div class="col-6 d-flex justify-content-between"> <i class="bi bi-person-badge"
+                style="font-size: 3rem; color:white;"></i> <span class="text-center pl-2"
+                style="font-size: 2rem; color:white;">{{totalUsers}}</span> </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col"> <a href="#" class="text-decoration-none font-color-none text-reset">
+        <div class="card h-100 border-black mb-3" style="background-color: #5D76A9; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+          <div class="card-body">
+            <h5 class="card-title" style="color: white;"><strong>Renting Users</strong></h5>
+            <hr>
+            <div class="col-6 d-flex justify-content-between"> <i class="bi bi-person-fill-up"
+                style="font-size: 3rem; color: white;"></i> <span class="text-center pl-2"
+                style="font-size: 2rem; color: white;">{{rentingUsers}}</span> </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col"> <a href="#" class="text-decoration-none font-color-none text-reset">
+        <div class="card h-100 border-black mb-3 text-white" style="background-color: #0077c0; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Archive</strong></h5>
+            <hr>
+            <div class="col-6 d-flex justify-content-between"> <i class="bi bi-archive-fill"
+                style="font-size: 3rem; color:;"></i> <span class="text-center pl-2"
+                style="font-size: 2rem; color:;">{{archivedBooks}}</span> </div>
+          </div>
+        </div>
+      </a> </div>
+  </div>
+</body>
+
+</html>
