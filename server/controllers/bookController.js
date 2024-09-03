@@ -1649,7 +1649,7 @@ const clientDefault = twilio(accountSidDefault, authTokenDefault);
 function sendTwilioNotification(phoneNumber, bookTitle, returnDate, res) {
     const formattedPhoneNumber = `+${phoneNumber}`;
 
-    const userTwilioInfo = twilioAccountInfoMap[phoneNumber] || {
+    const userTwilioInfo = {
         accountSid: accountSidDefault,
         authToken: authTokenDefault,
         twilioPhoneNumber: twilioPhoneNumberDefault
