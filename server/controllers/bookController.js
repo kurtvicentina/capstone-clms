@@ -1641,31 +1641,35 @@ exports.renewBook = (req, res) => {
 };
 
 
-const accountSidDefault = 'AC47c7cf3bde2cdc7e1a96baab4bd8b580'; 
-const authTokenDefault = '008444641ec918369fc6217b58a434a6'; 
-const twilioPhoneNumberDefault = '+13195190135';
+const accountSidDefault = process.env.accountSidDefault; 
+const authTokenDefault = process.env.authTokenDefault; 
+const twilioPhoneNumberDefault = process.env.twilioPhoneNumberDefault;
+const phoneNumber1 = process.env.phoneNumber_1
+const phoneNumber2 = process.env.phoneNumber_2
+const phoneNumber3 = process.env.phoneNumber_3
+const phoneNumber4 = process.env.phoneNumber_4
 const clientDefault = twilio(accountSidDefault, authTokenDefault);
 
 const twilioAccountInfoMap = {
-    '639279336843': {
-        accountSid: 'AC47c7cf3bde2cdc7e1a96baab4bd8b580',
-        authToken: '008444641ec918369fc6217b58a434a6',
-        twilioPhoneNumber: '+13195190135'
+    phoneNumber1: {
+        accountSid: accountSidDefault,
+        authToken: authTokenDefault,
+        twilioPhoneNumber: twilioPhoneNumberDefault
     },
-    '639555341052': {
-        accountSid: 'ACbd53f7de6e4abdf80ead35ac1e0e1e31',
-        authToken: 'dd41c93ad518b0a72882384be01b6f93',
-        twilioPhoneNumber: '+17208975196'
+    phoneNumber2: {
+        accountSid: process.env.accountSid_2,
+        authToken: process.env.authToken_2,
+        twilioPhoneNumber: process.env.twilioPhoneNumber_2
     },
-    '639984087119':{
-        accountSid: 'ACf52d273bb3e03f1d48de9ee33584193d',
-        authToken: 'f0541bab796106be49f7177c92281b3b',
-        twilioPhoneNumber: '+18576754190'
+    phoneNumber3:{
+        accountSid: process.env.accountSid_3,
+        authToken: process.env.authToken_3,
+        twilioPhoneNumber: process.env.twilioPhoneNumber_3
     },
-    '639667311328':{
-        accountSid: 'AC3e72ce73d2def63de0f7242e7165e950',
-        authToken: '3aa00bd1a91cc4e04acfbb8fe5a434fd',
-        twilioPhoneNumber: '+16592175768'
+    phoneNumber4:{
+        accountSid: process.env.accountSid_4,
+        authToken: process.env.authToken_4,
+        twilioPhoneNumber: process.env.twilioPhoneNumber_4
     }
 };
 
@@ -1673,9 +1677,9 @@ function sendTwilioNotification(phoneNumber, bookTitle, returnDate, res) {
     const formattedPhoneNumber = `+${phoneNumber}`;
 
     const userTwilioInfo = twilioAccountInfoMap[phoneNumber] || {
-        accountSid: 'AC47c7cf3bde2cdc7e1a96baab4bd8b580',
-        authToken: '008444641ec918369fc6217b58a434a6',
-        twilioPhoneNumber: '+13195190135'
+        accountSid: accountSidDefault,
+        authToken: authTokenDefault,
+        twilioPhoneNumber: twilioPhoneNumberDefault
     };
 
     const client = twilio(userTwilioInfo.accountSid, userTwilioInfo.authToken);
