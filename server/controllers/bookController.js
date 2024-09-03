@@ -1644,34 +1644,7 @@ exports.renewBook = (req, res) => {
 const accountSidDefault = process.env.accountSidDefault; 
 const authTokenDefault = process.env.authTokenDefault; 
 const twilioPhoneNumberDefault = process.env.twilioPhoneNumberDefault;
-const phoneNumber1 = process.env.phoneNumber_1
-const phoneNumber2 = process.env.phoneNumber_2
-const phoneNumber3 = process.env.phoneNumber_3
-const phoneNumber4 = process.env.phoneNumber_4
 const clientDefault = twilio(accountSidDefault, authTokenDefault);
-
-const twilioAccountInfoMap = {
-    phoneNumber1: {
-        accountSid: accountSidDefault,
-        authToken: authTokenDefault,
-        twilioPhoneNumber: twilioPhoneNumberDefault
-    },
-    phoneNumber2: {
-        accountSid: process.env.accountSid_2,
-        authToken: process.env.authToken_2,
-        twilioPhoneNumber: process.env.twilioPhoneNumber_2
-    },
-    phoneNumber3:{
-        accountSid: process.env.accountSid_3,
-        authToken: process.env.authToken_3,
-        twilioPhoneNumber: process.env.twilioPhoneNumber_3
-    },
-    phoneNumber4:{
-        accountSid: process.env.accountSid_4,
-        authToken: process.env.authToken_4,
-        twilioPhoneNumber: process.env.twilioPhoneNumber_4
-    }
-};
 
 function sendTwilioNotification(phoneNumber, bookTitle, returnDate, res) {
     const formattedPhoneNumber = `+${phoneNumber}`;
